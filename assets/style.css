@@ -1,13 +1,60 @@
-#img{
-            border: 3px solid #d50c9ceb;
-            border-radius: 50%;
-            display: block;
-            margin: 30px auto;
-            width: 180px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-}
-#img:hover {
-            transform: scale(1.08);
-            box-shadow: 0 6px 20px #fe00b6;
-        }
+.img-container {
+    width: 180px;  /* Largura da imagem */
+    height: 180px; /* Altura da imagem */
+    border-radius: 50%;
+    margin: 30px auto;
+    padding: 3px; /* Espaço para a borda aparecer */
+    position: relative; /* Essencial para o posicionamento do ::before */
+    overflow: hidden; /* Garante que tudo fique dentro do círculo */
+  
+    /* Efeitos de sombra e de passar o mouse que estavam na imagem */
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  }
+  
+  .img-container:hover {
+
+    transform: scale(1.08);
+    box-shadow: 0 20px 50px rgb(255, 48, 48);
+  }
+  
+  /* A camada de gradiente que vai girar */
+  .img-container::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%; /* Tamanho grande para não ter cantos ao girar */
+    height: 200%;
+    z-index: -1; /* Coloca o gradiente atrás da imagem */
+  
+    
+    /* Gradiente cônico funciona muito bem para este efeito */
+    background-image: conic-gradient(
+      #cc02ffeb, 
+      rgba(201, 255, 4, 0.818), 
+      rgb(255, 48, 48), 
+      rgb(8, 255, 144),
+      #c79b18eb
+    );
+  
+    /* Centraliza o gradiente e aplica a animação */
+      transform-origin: center center; 
+    animation: rotBGimg 3s linear infinite;
+  }
+  
+  /* Animação para girar o gradiente */
+  @keyframes rotBGimg {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+  #img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: block;
+  }  
